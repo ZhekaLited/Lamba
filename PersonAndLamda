@@ -74,6 +74,12 @@ public class BuiltingFunInterface {
         Consumer<Person> greeting = p -> System.out.println("Hello, " + p.getName());
         person = new Person("name" , "surname");
         greeting.accept(person);
+        
+         //Сравниватель
+        Comparator<Person> comparator = (p1,p2) ->p1.getName().compareTo((p2.getName()));
+        Person person1 = new Person("Jhon" , "Duo");
+        Person person2 = new Person("Alice" , "Kridje");
+        System.out.println(comparator.compare(person1,person2));
     }
 
     boolean isPositif(Integer i) {
