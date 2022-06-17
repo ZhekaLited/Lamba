@@ -1,0 +1,83 @@
+
+package com.company.magicBox;
+
+    public class Person {
+        String name;
+        String surname;
+
+        public Person(String name, String surname) {
+
+
+            this.name
+
+                    = name;
+            this.surname = surname;
+        }
+
+        public Person() {
+
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        public String getSurname() {
+            return surname;
+        }
+
+        public String getSurmame() {
+            return surname;
+        }
+    }
+
+
+--------------------------------------------------------------------------
+
+
+package com.company;
+
+import com.company.magicBox.Person;
+
+import java.util.function.Consumer;
+import java.util.function.Function;
+import java.util.function.Predicate;
+import java.util.function.Supplier;
+
+public class BuiltingFunInterface {
+    public static void main(String[] args) {
+        //Придикат
+        int n = 2;
+        Predicate<Integer> isPositive = i->i>0;
+        System.out.println(isPositive.test(n));
+
+        Predicate<Integer> isZero = i->i==0;
+        System.out.println(isZero.test(n));
+
+        Predicate<Integer> isNegative = isPositive.or(isZero).negate();
+        System.out.println(isNegative.test(n));
+
+        //Функция
+        Function<Person, String> getName = Person::getName;
+        Person person = new Person("name", "surname");
+        System.out.println(getName.apply(person));
+
+        Function<String,Character> firstChar = s->s.charAt(0);
+        System.out.println(firstChar.apply("String"));
+
+        //Поставщик
+        Supplier<Person> supplier = Person::new;
+        person = supplier.get();
+        System.out.println(person.getName());
+
+        //Потребитель
+        Consumer<Person> greeting = p -> System.out.println("Hello, " + p.getName());
+        person = new Person("name" , "surname");
+        greeting.accept(person);
+    }
+
+    boolean isPositif(Integer i) {
+        if(i>0) return true;
+        else return false;
+    }
+}
